@@ -10,6 +10,13 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="/front/css/font-awesome.css">
     <link rel="stylesheet" href="/front/css/styles.css">
+
+    <link href="/pagination-for-website/buzina-pagination.min.css" rel="stylesheet" type="text/css">
+    <link rel='stylesheet prefetch' href='https://www.rudebox.org.ua/demo/lessons/styles/style.css'>
+    <style>
+        .container { margin: 150px auto; }
+    </style>
+    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>

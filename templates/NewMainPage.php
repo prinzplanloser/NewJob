@@ -3,8 +3,7 @@
 
     <div class="container">
         <?php /** @var \App\Models\Tasks\Task $tasks */ ?>
-        <table class="table" style="margin: auto">
-
+        <table id="table-id" class="table" style="margin: auto">
             <thead class="thead-dark">
             <tr>
                 <th class="th-sm">Имя пользователя</th>
@@ -26,12 +25,13 @@
 
         <br>
         <form action="/newTask" class="form-inline my-2 my-lg-0" METHOD="post">
-            <input class="form-control mr-sm-2" type="Text" name="name" placeholder="Ваше имя">
+            <input class="form-control mr-sm-2" type="Text" name="name" placeholder="Ваше имя"
+                   value="<?= $_POST['name'] ?>">
             <p></p>
-            <input class="form-control mr-sm-2" type="email" name="email" placeholder="Ваш Email">
+            <input class="form-control mr-sm-2" type="email" name="email" placeholder="Ваш Email" value="<?= $_POST['email'] ?>">
 
             <input style="word-break: break-word" name="text" class="form-control mr-sm-2" type="Text"
-                   placeholder="Текст задачи">
+                   placeholder="Текст задачи" value="<?= $_POST['text'] ?>">
 
             <button class="btn btn-info my-2 my-sm-0" type="submit">Создать задачу</button>
         </form>

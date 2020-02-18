@@ -57,8 +57,8 @@ class Task extends ActiveRecordEntity
             throw new InvalidArgumentException('Не передано имя');
         }
 
-        if (!preg_match('/[a-zA-Z0-9]+/', $taskData['name'])) {
-            throw new \App\Exceptions\InvalidArgumentException('Имя может состоять только из символов латинского алфавита и цифр');
+        if (!preg_match('/^[a-zA-Zа-яёА-ЯЁ0-9]+$/u', $taskData['name'])) {
+            throw new \App\Exceptions\InvalidArgumentException('Имя может состоять только из букв и цифр');
         }
 
         if (empty($taskData['email'])) {
