@@ -2,18 +2,48 @@
 
 
     <div class="container">
-        <?php /** @var \App\Models\Tasks\Task $tasks */ ?>
-        <table id="table-id" class="table" style="margin: auto">
-            <thead class="thead-dark">
+
+        <table class="table" style="margin: auto">
+            <thead class="thead-dark"> <!-- add class="thead-light" for a light header -->
+
             <tr>
-                <th class="th-sm">Имя пользователя</th>
-                <th class="th-sm">e-mail</th>
-                <th class="th-sm">Текст задачи</th>
+                <th colspan="7" class="ts-pager">
+                    <div class="form-inline">
+                        <div class="btn-group btn-group-sm mx-1" role="group">
+                            <button type="button" class="btn btn-secondary first" title="first">⇤</button>
+                            <button type="button" class="btn btn-secondary prev" title="previous">←</button>
+                        </div>
+                        <div class="btn-group btn-group-sm mx-1" role="group">
+                            <button type="button" class="btn btn-secondary next" title="next">→</button>
+                            <button type="button" class="btn btn-secondary last" title="last">⇥</button>
+                        </div>
+                        <select class="form-control-sm custom-select px-1 pagesize" title="Select page size">
+                            <option selected="selected" value="3">3</option>
+                            <option value="all">All Rows</option>
+                        </select>
+                        <select class="form-control-sm custom-select px-4 mx-1 pagenum"
+                                title="Select page number"></select>
+                    </div>
+                </th>
             </tr>
+
+
+            <tr>
+                <th>Имя пользователя</th>
+                <th>e-mail</th>
+                <th>Текст задачи</th>
+            </tr>
+
+
             </thead>
-            <tbody
+            <tfoot>
+
+
+            </tfoot>
+            <tbody>
             <?php /**@var \App\Models\Tasks\Task $task */ ?>
             <?php foreach ($pagination as $task): ?>
+
                 <tr>
                     <td><?= $task->getName() ?></td>
                     <td><?= $task->getEmail() ?></td>
@@ -22,39 +52,23 @@
             <?php endforeach; ?>
             </tbody>
         </table>
+    </div>
 
-        <br>
+
+    <br>
+    <div class="container">
         <form action="/newTask" class="form-inline my-2 my-lg-0" METHOD="post">
             <input class="form-control mr-sm-2" type="Text" name="name" placeholder="Ваше имя"
                    value="<?= $_POST['name'] ?>">
             <p></p>
-            <input class="form-control mr-sm-2" type="email" name="email" placeholder="Ваш Email" value="<?= $_POST['email'] ?>">
+            <input class="form-control mr-sm-2" type="email" name="email" placeholder="Ваш Email"
+                   value="<?= $_POST['email'] ?>">
 
             <input style="word-break: break-word" name="text" class="form-control mr-sm-2" type="Text"
                    placeholder="Текст задачи" value="<?= $_POST['text'] ?>">
 
             <button class="btn btn-info my-2 my-sm-0" type="submit">Создать задачу</button>
         </form>
-
-    </div>
-    <br>
-    <div class="container">
-        <?php // Проверяем нужны ли стрелки назад
-        if ($page != 1) $pervpage = '<a href= /page/1><<</a>
-    <a href= /page/' . ($page - 1) . '><</a> ';
-        // Проверяем нужны ли стрелки вперед
-        if ($page != $total) $nextpage = ' <a href= /page/' . ($page + 1) . '>></a>
-    <a href= /page/' . $total . '>>></a>';
-
-        // Находим две ближайшие станицы с обоих краев, если они есть
-        if ($page - 2 > 0) $page2left = ' <a href= /page/' . ($page - 2) . '>' . ($page - 2) . '</a> | ';
-        if ($page - 1 > 0) $page1left = '<a href= /page/' . ($page - 1) . '>' . ($page - 1) . '</a> | ';
-        if ($page + 2 <= $total) $page2right = ' | <a href= /page/' . ($page + 2) . '>' . ($page + 2) . '</a>';
-        if ($page + 1 <= $total) $page1right = ' | <a href= /page/' . ($page + 1) . '>' . ($page + 1) . '</a>';
-
-        // Вывод меню
-        echo $pervpage . $page2left . $page1left . '<b>' . $page . '</b>' . $page1right . $page2right . $nextpage;
-
-        ?>
+        <br>
     </div>
 <?php require_once __DIR__ . '/footer.php' ?>

@@ -11,12 +11,33 @@
     <link rel="stylesheet" href="/front/css/font-awesome.css">
     <link rel="stylesheet" href="/front/css/styles.css">
 
-    <link href="/pagination-for-website/buzina-pagination.min.css" rel="stylesheet" type="text/css">
-    <link rel='stylesheet prefetch' href='https://www.rudebox.org.ua/demo/lessons/styles/style.css'>
-    <style>
-        .container { margin: 150px auto; }
-    </style>
+
+    <link rel="stylesheet" href="/front/css/styles.css">
+    <script src="/bower_components/jquery-3.4.1.min/index.js"></script>
+
+
+    <link rel="stylesheet" href="/sort/tablesorter-master/dist/css/theme.bootstrap_4.min.css">
+    <link rel="stylesheet" href="/sort/tablesorter-master/dist/css/theme.bootstrap.min.css">
     <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/front/css/font-awesome.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <script src="/bower_components/jquery/src/jquery.js"></script>
+    <script src="/sort/tablesorter-master/dist/js/jquery.tablesorter.js"></script>
+    <script src="/sort/tablesorter-master/dist/js/jquery.tablesorter.widgets.js"></script>
+
+    <script src="/front/js/js.js"></script>
+
+    <script src="/sort/tablesorter-master/addons/pager/jquery.tablesorter.pager.js"></script>
+    <style>
+        .tablesorter-pager .btn-group-sm .btn {
+            font-size: 1.2em; /* make pager arrows more visible */
+        }
+    </style>
+
+
 </head>
 
 <body>

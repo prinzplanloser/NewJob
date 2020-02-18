@@ -38,6 +38,7 @@ class Pagination
         if ($page > $total) $page = $total;
         $start = $page * $pageLimit - $pageLimit;
         $pagination = $this->db->limit("SELECT * FROM tasks LIMIT ?,?", [$start, $pageLimit], Task::class);
+        $pagination = $this->db->limit("SELECT * FROM tasks",[],Task::class);
         return ['pagination' => $pagination, 'total' => $total];
     }
 
