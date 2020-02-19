@@ -20,7 +20,8 @@ class RegisterController extends AbstractController
                 header('Location: /');
                 exit();
             } catch (InvalidArgumentException $e) {
-                $this->view->renderHtml('loginPage.php', ['error' => $e->getMessage()]);
+                $_SESSION['error']= $e->getMessage();
+                $this->view->renderHtml('loginPage.php');
                 return;
             }
         }

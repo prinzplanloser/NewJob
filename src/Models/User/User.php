@@ -2,7 +2,6 @@
 
 namespace App\Models\User;
 
-
 use App\Exceptions\InvalidArgumentException;
 use App\Models\ActiveRecordEntity;
 
@@ -51,11 +50,11 @@ class User extends ActiveRecordEntity
     public static function login(array $loginData): User
     {
         if (empty($loginData['login'])) {
-            throw new InvalidArgumentException('Не передан login');
+            throw new InvalidArgumentException('Не передан логин');
         }
 
         if (empty($loginData['password'])) {
-            throw new InvalidArgumentException('Не передан password');
+            throw new InvalidArgumentException('Не передан пароль');
         }
 
         $user = User::findOneByColumn('nickname', $loginData['login']);

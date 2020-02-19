@@ -10,19 +10,13 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="/front/css/font-awesome.css">
     <link rel="stylesheet" href="/front/css/styles.css">
-
-
-    <link rel="stylesheet" href="/front/css/styles.css">
     <script src="/bower_components/jquery-3.4.1.min/index.js"></script>
-
-
     <link rel="stylesheet" href="/sort/tablesorter-master/dist/css/theme.bootstrap_4.min.css">
     <link rel="stylesheet" href="/sort/tablesorter-master/dist/css/theme.bootstrap.min.css">
     <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="/front/css/font-awesome.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
 
     <script src="/bower_components/jquery/src/jquery.js"></script>
     <script src="/sort/tablesorter-master/dist/js/jquery.tablesorter.js"></script>
@@ -52,7 +46,7 @@
 
         <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown" style="margin-right: 75px;">
-                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink"
+                <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="nav-profile-img rounded-circle" src="/front/images/ProfileCat.jpg">
                 </a>
@@ -68,10 +62,17 @@
         </ul>
     </div>
 </nav>
+<?php /**@var \App\Services\SessionWrapper\SessionWrapper $sessionWrapper */ ?>
+<div class="container">
+    <div style="text-align: center;">
+        <?php if (!empty($_SESSION['error'])): ?>
+            <div style="background-color: red;padding: 5px;margin: 15px"><?= $sessionWrapper->handle('error')?></div>
+        <?php endif; ?>
+    </div>
 
-
-<div style="text-align: center;">
-    <?php if (!empty($error)): ?>
-        <div style="background-color: red;padding: 5px;margin: 15px"><?= $error ?></div>
-    <?php endif; ?>
+    <div style="text-align: center;">
+        <?php if (!empty($_SESSION['message'])): ?>
+            <div style="background-color: greenyellow;padding: 5px;margin: 15px"><?= $sessionWrapper->handle('message')?></div>
+        <?php endif; ?>
+    </div>
 </div>

@@ -96,6 +96,7 @@ abstract class ActiveRecordEntity
         }
         $sql = 'UPDATE ' . static::getTableName() . ' SET ' . implode(', ', $columns2params) . ' WHERE id = ' . $this->id;
         $db = Db::getInstance();
+
         $db->query($sql, $params2values, static::class);
     }
 
