@@ -3,6 +3,7 @@
 namespace App\Models\User;
 
 use App\Exceptions\InvalidArgumentException;
+use App\Exceptions\UnauthorizedException;
 use App\Models\ActiveRecordEntity;
 
 
@@ -44,6 +45,7 @@ class User extends ActiveRecordEntity
     {
         return $this->authToken;
     }
+
 
 
 

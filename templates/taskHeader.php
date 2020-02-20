@@ -52,13 +52,8 @@
 <div class="container">
     <div style="text-align: center;">
         <?php if (!empty($_SESSION['error'])): ?>
-            <div style="background-color: red;padding: 5px;margin: 15px"><?= $sessionWrapper->handle('error') ?></div>
+            <div style="background-color: red;padding: 5px;margin: 15px"><?= \App\Services\SessionWrapper\SessionWrapper::handle('error') ?></div>
         <?php endif; ?>
     </div>
 
-    <div style="text-align: center;">
-        <?php if (!empty($_SESSION['message'])): ?>
-            <div style="background-color: greenyellow;padding: 5px;margin: 15px"><?= $sessionWrapper->handle('message') ?></div>
-        <?php endif; ?>
-    </div>
 </div>

@@ -1,5 +1,5 @@
 <?php require_once __DIR__ . '/taskHeader.php' ?>
-<?php /**@var \App\Models\Tasks\Task $task */ ?>
+<?php /**@var \App\Models\Tasks\Tasks $task */ ?>
 
     <div class="container">
         <form action="/task/<?= $task->getId() ?>" method="post">

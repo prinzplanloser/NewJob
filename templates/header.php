@@ -46,12 +46,14 @@
 
         <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown" style="margin-right: 75px;">
-                <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink"
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="nav-profile-img rounded-circle" src="/front/images/ProfileCat.jpg">
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <?php if (!empty($user)) { ?>
+                    <?php use App\Services\SessionWrapper\SessionWrapper;
+
+                    if (!empty($user)) { ?>
                         Привет, <?= $user->getNickname() ?>
                         <a class="dropdown-item" href="/logout">Выйти</a>
                     <?php } else { ?>
@@ -62,17 +64,18 @@
         </ul>
     </div>
 </nav>
-<?php /**@var \App\Services\SessionWrapper\SessionWrapper $sessionWrapper */ ?>
+
 <div class="container">
+
     <div style="text-align: center;">
         <?php if (!empty($_SESSION['error'])): ?>
-            <div style="background-color: red;padding: 5px;margin: 15px"><?= $sessionWrapper->handle('error')?></div>
+            <div style="background-color: red;padding: 5px;margin: 15px"><?= SessionWrapper::handle('error') ?></div>
         <?php endif; ?>
     </div>
 
     <div style="text-align: center;">
         <?php if (!empty($_SESSION['message'])): ?>
-            <div style="background-color: greenyellow;padding: 5px;margin: 15px"><?= $sessionWrapper->handle('message')?></div>
+            <div style="background-color: greenyellow;padding: 5px;margin: 15px"><?= SessionWrapper::handle('message') ?></div>
         <?php endif; ?>
     </div>
 </div>

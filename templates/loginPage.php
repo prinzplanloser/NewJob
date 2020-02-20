@@ -2,7 +2,7 @@
 
 
     <div class="container">
-        <form action="login" method="post">
+        <form action="/login" method="post">
             <div class="form-row align-items-center">
                 <div class="col-auto">
                     <label class="sr-only" for="inlineFormInput">Name</label>

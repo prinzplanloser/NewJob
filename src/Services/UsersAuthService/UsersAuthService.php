@@ -3,6 +3,7 @@
 
 namespace App\Services\UsersAuthService;
 
+use App\Exceptions\UnauthorizedException;
 use App\Models\User\User;
 
 class UsersAuthService
@@ -33,6 +34,14 @@ class UsersAuthService
             return null;
         }
         return $user;
+    }
+
+    public static function userCheck(User $user = null)
+    {
+        if ($user === null) {
+            throw new UnauthorizedException('Вы не залогинены');
+        }
+
     }
 
     public static function deleteToken()

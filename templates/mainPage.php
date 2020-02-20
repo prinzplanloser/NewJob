@@ -43,7 +43,7 @@
             </tfoot>
             <tbody>
 
-            <?php /**@var \App\Models\Tasks\Task $task */ ?>
+            <?php /**@var \App\Models\Tasks\Tasks $task */ ?>
             <?php foreach ($pagination as $task): ?>
 
                 <tr>
@@ -74,14 +74,15 @@
 
         <form action="/newTask" class="form-inline my-2 my-lg-0" METHOD="post">
             <input class="form-control mr-sm-2" type="Text" name="name" placeholder="Ваше имя"
-                   value="<?= htmlspecialchars($sessionWrapper->handle('name')) ?>"
+                   value="<?= htmlspecialchars(\App\Services\SessionWrapper\SessionWrapper::handle('name')); ?>"
             >
             <p></p>
             <input class="form-control mr-sm-2" type="email" name="email" placeholder="Ваш Email"
-                   value="<?= htmlspecialchars($sessionWrapper->handle('email')) ?>">
+                   value="<?= htmlspecialchars(\App\Services\SessionWrapper\SessionWrapper::handle('email')) ?>">
 
             <input style="word-break: break-word" name="text" class="form-control mr-sm-2" type="Text"
-                   placeholder="Текст задачи" value="<?= htmlspecialchars($sessionWrapper->handle('text')) ?>">
+                   placeholder="Текст задачи"
+                   value="<?= htmlspecialchars(\App\Services\SessionWrapper\SessionWrapper::handle('text')) ?>">
 
             <button class=" btn btn-info my-2 my-sm-0" type="submit">Создать задачу</button>
 

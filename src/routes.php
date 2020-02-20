@@ -2,6 +2,7 @@
 
 use App\Controllers\MainController;
 use App\Controllers\TaskController;
+use App\Exceptions\UnauthorizedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Symfony\Component\Routing\Loader\Configurator\RouteConfigurator;
@@ -35,6 +36,8 @@ try {
 } catch (ResourceNotFoundException $e) {
     $view = new \App\View\View(__DIR__ . '/../templates');
     $view->renderHtml('404.php');
+} catch (UnauthorizedException $e) {
+    $view->renderHtml('loginPage.php');
 }
 
 if (isset($parameters)) {

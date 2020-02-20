@@ -3,11 +3,9 @@
 namespace App\Models\Tasks;
 
 use App\Exceptions\InvalidArgumentException;
-
 use App\Models\ActiveRecordEntity;
-use App\Services\Db;
 
-class Task extends ActiveRecordEntity
+class Tasks extends ActiveRecordEntity
 {
     /** @var string */
     protected $name;
@@ -20,7 +18,7 @@ class Task extends ActiveRecordEntity
     /** @var string */
     protected $adminStatus;
 
-    public function __toString()
+    public function __toString():string
     {
         return 'tasks';
     }
@@ -30,22 +28,22 @@ class Task extends ActiveRecordEntity
         return 'tasks';
     }
 
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
 
-    public function getStatus()
+    public function getStatus(): ?string
     {
         return $this->status;
     }
 
-    public function getText()
+    public function getText(): string
     {
         return $this->text;
     }
@@ -55,7 +53,7 @@ class Task extends ActiveRecordEntity
         $this->name = $name;
     }
 
-    public function getAdminStatus()
+    public function getAdminStatus(): ?string
     {
         return $this->adminStatus;
     }
@@ -81,7 +79,7 @@ class Task extends ActiveRecordEntity
     }
 
 
-    public static function create(array $taskData): Task
+    public static function create(array $taskData): Tasks
     {
         if (empty($taskData['name'])) {
             throw new InvalidArgumentException('Не передано имя');
@@ -104,7 +102,7 @@ class Task extends ActiveRecordEntity
         }
 
 
-        $task = new Task();
+        $task = new Tasks();
         $task->name = $taskData['name'];
         $task->email = $taskData['email'];
         $task->text = $taskData['text'];
@@ -116,17 +114,27 @@ class Task extends ActiveRecordEntity
     }
 
 
-    public function updateFromArray(array $fields): Task
+    public function updateFromArray(array $fields): Tasks
     {
 
         if (empty($fields['name'])) {
-            throw new InvalidArgumentException('Не передано название статьи');
+            throw new InvalidArgumentException('Не передано имя');
         }
+        if (empty($fields['text'])) {
+            throw new InvalidArgumentException('Не передан текст задачи');
+        }
+
         if (empty($fields['email'])) {
             throw new InvalidArgumentException('Не передан email');
         }
-        if (empty($fields['text'])) {
-            throw new InvalidArgumentException('Не передан текст статьи');
+
+        if (!preg_match('/^[a-zA-Zа-яёА-ЯЁ0-9]+$/u', $fields['name'])) {
+            throw new \App\Exceptions\InvalidArgumentException('Имя может состоять только из букв и цифр');
+        }
+
+
+        if (!filter_var($fields['email'], FILTER_VALIDATE_EMAIL)) {
+            throw new InvalidArgumentException('Email некорректен');
         }
 
         $this->setName($fields['name']);
@@ -141,5 +149,14 @@ class Task extends ActiveRecordEntity
         $this->save();
 
         return $this;
+    }
+
+    public function checkTextDiff(string $inputText): array
+    {
+        if ($this->getText() !== $inputText) {
+            $_POST['adminStatus'] = 'Отредактировано администратором';
+        }
+
+        return $_POST;
     }
 }

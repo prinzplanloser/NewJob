@@ -2,17 +2,18 @@
 
 namespace App\Controllers;
 
-use App\Models\Tasks\Task;
+use App\Models\Tasks\Tasks;
 
 
 class MainController extends AbstractController
 {
 
-    public function pag()
+    public function pag(): void
     {
-        $page = Task::findAll();
+        $page = Tasks::findAll();
 
         $this->view->renderHtml('mainPage.php', ['pagination' => $page]);
+        return;
     }
 
 

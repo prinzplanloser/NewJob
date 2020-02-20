@@ -4,56 +4,65 @@ namespace App\Controllers;
 
 
 use App\Exceptions\InvalidArgumentException;
-use App\Models\Tasks\Task;
+use App\Exceptions\UnauthorizedException;
+use App\Models\Tasks\Tasks;
+use App\Services\SessionWrapper\SessionWrapper;
 use App\Services\UsersAuthService\UsersAuthService;
+
 
 class TaskController extends AbstractController
 {
 
-    public function create()
+
+    public function create():void
     {
         if (!empty($_POST)) {
 
             try {
-                $task = Task::create($_POST);
-                $_SESSION['message'] = 'Ваша запись создана';
+                Tasks::create($_POST);
+                SessionWrapper::addToSession('message', 'Ваша запись создана');
                 header('Location: /');
-                exit();
+                return;
             } catch (InvalidArgumentException $e) {
                 $_SESSION['name'] = $_POST['name'];
                 $_SESSION['email'] = $_POST['email'];
                 $_SESSION['text'] = $_POST['text'];
                 $_SESSION['error'] = $e->getMessage();
                 header('Location: /');
-                exit();
+                return;
             }
         }
     }
 
-    public function edit($slug)
+    public function edit(int $slug): void
     {
-        if ($this->user) {
-            $task = Task::getById($slug);
-            if (!empty($_POST)) {
-                try {
-                    if ($task->getText() !== $_POST['text']) {
-                        $_POST['adminStatus'] = 'Отредактировано администратором';
-                    }
-                    $task->updateFromArray($_POST);
-
-                } catch (InvalidArgumentException $e) {
-                    $_SESSION['error'] = $e->getMessage();
-                    $this->view->renderHtml('taskPage/edit.php', ['task' => $task]);
-                    return;
-                }
-                header('Location:/');
-                exit();
-
-            }
-            $this->view->renderHtml('taskPage.php', ['task' => $task]);
-        } else {
-            header('Location:/login');
+        try {
+            UsersAuthService::userCheck($this->user);
+        } catch (UnauthorizedException $e) {
+            $this->view->renderHtml('loginPage.php');
+            return;
         }
+
+        $task = Tasks::getById($slug);
+
+        if (!empty($_POST)) {
+            try {
+                $task->checkTextDiff($_POST['text']);
+
+                $task->updateFromArray($_POST);
+
+            } catch (InvalidArgumentException $e) {
+                SessionWrapper::addToSession('error', $e->getMessage());
+                $this->view->renderHtml('taskPage.php', ['task' => $task]);
+                return;
+            }
+            header('Location:/');
+        } else {
+            $this->view->renderHtml('taskPage.php', ['task' => $task]);
+            return;
+        }
+
+
     }
 
 
