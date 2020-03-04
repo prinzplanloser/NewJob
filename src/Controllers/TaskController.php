@@ -24,10 +24,10 @@ class TaskController extends AbstractController
                 header('Location: /');
                 return;
             } catch (InvalidArgumentException $e) {
-                $_SESSION['name'] = $_POST['name'];
-                $_SESSION['email'] = $_POST['email'];
-                $_SESSION['text'] = $_POST['text'];
-                $_SESSION['error'] = $e->getMessage();
+                SessionWrapper::addToSession('name',$_POST['name']);
+                SessionWrapper::addToSession('email',$_POST['email']);
+                SessionWrapper::addToSession('text',$_POST['text']);
+                SessionWrapper::addToSession('error',$e->getMessage());
                 header('Location: /');
                 return;
             }

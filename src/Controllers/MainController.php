@@ -4,11 +4,10 @@ namespace App\Controllers;
 
 use App\Models\Tasks\Tasks;
 
-
 class MainController extends AbstractController
 {
 
-    public function pag(): void
+    public function index(): void
     {
         $page = Tasks::findAll();
 

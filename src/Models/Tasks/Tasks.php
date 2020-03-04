@@ -109,7 +109,6 @@ class Tasks extends ActiveRecordEntity
         $task->status = 'Не выполнена';
         $task->save();
 
-
         return $task;
     }
 

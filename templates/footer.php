@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <footer class="footer">
     <div class="container text-center">
         <span class="text-muted">Made with <i class="fa fa-heart" style="color: red;"></i></span>
@@ -15,8 +16,6 @@
 <script>
     $('.dropdown-toggle').dropdown();
 </script>
-
-
 
 
 </body>

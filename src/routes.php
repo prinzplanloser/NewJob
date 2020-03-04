@@ -14,7 +14,7 @@ use App\Controllers\RegisterController;
 
 try {
 
-    $main = new Route('/', ['_controller' => MainController::class, 'method' => 'pag']);
+    $main = new Route('/', ['_controller' => MainController::class, 'method' => 'index']);
 
     $login = new Route('/login', ['_controller' => RegisterController::class, 'method' => 'login']);
     $logout = new Route('/logout', ['_controller' => RegisterController::class, 'method' => 'logout']);
@@ -22,7 +22,7 @@ try {
     $editTask = new Route('/task/{slug}', ['_controller' => TaskController::class, 'method' => 'edit']);
 
     $routes = new RouteCollection();
-    $routes->add('page', $main);
+    $routes->add('index', $main);
     $routes->add('login', $login);
     $routes->add('logout', $logout);
     $routes->add('newTask', $newTask);
@@ -42,11 +42,7 @@ try {
 
 if (isset($parameters)) {
     $controller = $parameters["_controller"];
-
     $action = $parameters["method"];
-
-
     $page = new $controller();
-
     $page->$action(...[$parameters['slug']]);
 }
